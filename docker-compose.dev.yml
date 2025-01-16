@@ -1,0 +1,4 @@
+services:
+  api:
+    container_name: rant-api
+    command: yarn dev -L

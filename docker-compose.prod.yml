@@ -1,0 +1,4 @@
+services:
+  api:
+    container_name: rant-prod
+    command: yarn start

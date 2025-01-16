@@ -1,0 +1,36 @@
+services:
+
+  api:
+    container_name: rant-api
+    environment:
+      - MONGODB_URL=mongodb://storage:27017/rant
+    restart: always
+    build:
+      .
+    volumes:
+      - .:/usr/src/api
+    depends_on:
+      - storage
+    networks:
+      - storage-network
+    ports:
+      - 3000:3000
+    expose:
+      - 3000:3000
+
+  # MongoDB Storage
+  storage:
+    container_name: rant-state
+    restart: always
+    image: mongo:latest
+    volumes:
+      - ./data:/data/db
+    networks:
+      - storage-network
+    ports:
+      - 27017:27017
+    expose:
+      - 27017:27017
+
+networks:
+  storage-network:
